@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="数据库,">
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="hello, my name is linjiaqinthis is a test page for my blog">
+<meta name="description" content="故障分类事务故障系统奔溃硬盘故障 数据访问物理块： 位于磁盘上缓冲块： 临时位于主存磁盘缓冲区： 内存中用于临时存放块的区域 每个事务Ti有一个私有工作区，用于保存Ti所访问和更新的所有数据项的副本。在事务初始时创建，在事务提交或终止时删除。 WAL先写日志，这是保持原子性的关键在事务提交之前写事务相关的所有日志记录到稳定存储介质，这是保持持久性的关键，确保我们能基于日志重建提交事务 潜入非潜入和">
+<meta name="keywords" content="数据库">
 <meta property="og:type" content="article">
-<meta property="og:title" content="test">
-<meta property="og:url" content="http://yoursite.com/2019/05/18/test/index.html">
+<meta property="og:title" content="数据库恢复技术">
+<meta property="og:url" content="http://yoursite.com/2019/05/25/数据库恢复技术/index.html">
 <meta property="og:site_name" content="linjiaqin的博客">
-<meta property="og:description" content="hello, my name is linjiaqinthis is a test page for my blog">
+<meta property="og:description" content="故障分类事务故障系统奔溃硬盘故障 数据访问物理块： 位于磁盘上缓冲块： 临时位于主存磁盘缓冲区： 内存中用于临时存放块的区域 每个事务Ti有一个私有工作区，用于保存Ti所访问和更新的所有数据项的副本。在事务初始时创建，在事务提交或终止时删除。 WAL先写日志，这是保持原子性的关键在事务提交之前写事务相关的所有日志记录到稳定存储介质，这是保持持久性的关键，确保我们能基于日志重建提交事务 潜入非潜入和">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-18T08:34:17.889Z">
+<meta property="og:updated_time" content="2019-05-25T14:56:15.306Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="test">
-<meta name="twitter:description" content="hello, my name is linjiaqinthis is a test page for my blog">
+<meta name="twitter:title" content="数据库恢复技术">
+<meta name="twitter:description" content="故障分类事务故障系统奔溃硬盘故障 数据访问物理块： 位于磁盘上缓冲块： 临时位于主存磁盘缓冲区： 内存中用于临时存放块的区域 每个事务Ti有一个私有工作区，用于保存Ti所访问和更新的所有数据项的副本。在事务初始时创建，在事务提交或终止时删除。 WAL先写日志，这是保持原子性的关键在事务提交之前写事务相关的所有日志记录到稳定存储介质，这是保持持久性的关键，确保我们能基于日志重建提交事务 潜入非潜入和">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/18/test/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/25/数据库恢复技术/">
 
 
 
 
 
-  <title>test | linjiaqin的博客</title>
+  <title>数据库恢复技术 | linjiaqin的博客</title>
   
 
 
@@ -232,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/18/test/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/25/数据库恢复技术/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="linjiaqin">
@@ -249,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">test</h1>
+          <h1 class="post-title" itemprop="name headline">数据库恢复技术</h1>
         
 
         <div class="post-meta">
@@ -261,8 +262,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-18T16:31:56+08:00">
-                2019-05-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-25T21:12:24+08:00">
+                2019-05-25
               </time>
             
 
@@ -280,8 +281,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/18/test/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/05/18/test/" itemprop="commentsCount"></span>
+                <a href="/2019/05/25/数据库恢复技术/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/05/25/数据库恢复技术/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -309,7 +310,21 @@
       
 
       
-        <h2 id="hello-my-name-is-linjiaqin"><a href="#hello-my-name-is-linjiaqin" class="headerlink" title="hello, my name is linjiaqin"></a>hello, my name is linjiaqin</h2><h3 id="this-is-a-test-page-for-my-blog"><a href="#this-is-a-test-page-for-my-blog" class="headerlink" title="this is a test page for my blog"></a>this is a test page for my blog</h3>
+        <h2 id="故障分类"><a href="#故障分类" class="headerlink" title="故障分类"></a>故障分类</h2><p>事务故障<br>系统奔溃<br>硬盘故障</p>
+<h3 id="数据访问"><a href="#数据访问" class="headerlink" title="数据访问"></a>数据访问</h3><p>物理块： 位于磁盘上<br>缓冲块： 临时位于主存<br>磁盘缓冲区： 内存中用于临时存放块的区域</p>
+<p>每个事务Ti有一个私有工作区，用于保存Ti所访问和更新的所有数据项的副本。在事务初始时创建，在事务提交或终止时删除。</p>
+<h2 id="WAL"><a href="#WAL" class="headerlink" title="WAL"></a>WAL</h2><p>先写日志，这是保持原子性的关键<br>在事务提交之前写事务相关的所有日志记录到稳定存储介质，这是保持持久性的关键，确保我们能基于日志重建提交事务</p>
+<h2 id="潜入非潜入和强制非强制"><a href="#潜入非潜入和强制非强制" class="headerlink" title="潜入非潜入和强制非强制"></a>潜入非潜入和强制非强制</h2><p>确定了何时把数据页从高速缓存写回磁盘  </p>
+<p>如果缓存中被事务更新的某个页在事务提交之前不能写回磁盘，称为非潜入<br>在事务提交之前把已更新的缓冲区写回磁盘，称为潜入<br>事务所有已更新的页在事务提交时被立即写回磁盘，为强制方法，否则为非强制方法  </p>
+<h2 id="基于日志的恢复"><a href="#基于日志的恢复" class="headerlink" title="基于日志的恢复"></a>基于日志的恢复</h2><p>用来进行事务故障恢复和系统故障恢复，并协助数据库备份副本进行磁盘故障恢复<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;ti start&gt; 事务开始</span><br><span class="line">&lt;ti, xj, v1, v2&gt; 数据xj写之前值为v1，写之后为v2</span><br><span class="line">&lt;ti, commit&gt;</span><br><span class="line">&lt;ti, abort&gt;</span><br></pre></td></tr></table></figure></p>
+<p>每次执行写操作之前，必须在数据库修改前建立这次写操作的日志记录<br>我们能利用日志记录中的旧值字段来撤销已经对数据库的修改</p>
+<h3 id="基于延迟更新"><a href="#基于延迟更新" class="headerlink" title="基于延迟更新"></a>基于延迟更新</h3><p>通过在日志中记录所有数据库的修改，将一个事务的所有write操作拖延到事务部分提交时才执行，来保证事务的原子性。<br>故障发生后，恢复子系统检查日志，看哪个事务需要重新执行。<br>事务Ti需要重新执行日志中既包含<ti start>又包含<ti commit>的记录。<br>如果事务执行完成后才奔溃，日志中的信息将用来把系统恢复到事务完成后的一直状态。<br>优点：无须undo，简化恢复<br>缺点</ti></ti></p>
+<h3 id="基于立即更新"><a href="#基于立即更新" class="headerlink" title="基于立即更新"></a>基于立即更新</h3><p>undo 包含<ti start> 不包含<ti commit><br>redo 既有start又有commit</ti></ti></p>
+<h3 id="检查点"><a href="#检查点" class="headerlink" title="检查点"></a>检查点</h3><p>基本思想是在日志文件中增加检查点标志记录，并在检查点标志记录写到稳存之前，完成一些必要的，到现在为止的阶段性归总工作<br>静态检查点和动态检查点</p>
+<p>分析过程<br>重做过程<br>撤销过程</p>
+<h3 id="arise算法"><a href="#arise算法" class="headerlink" title="arise算法"></a>arise算法</h3><p>steal<br>no force<br>Aries使用WAL预写日志来保证事务的Atomicity和Durability，WAL的刷新策略如下（steal/no-force）：</p>
+<p>所有的日志记录必须在它对应的行数据页被写入磁盘之前写入稳定存储（保证Atomicity）。<br>所有的日志记录必须在其所属的事务提交（commit）之前写入稳定存储（保证Durability）。</p>
+
       
     </div>
     
@@ -324,6 +339,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
+          
+        </div>
+      
 
       
       
@@ -333,8 +354,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/18/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2019/05/25/数据库调优/" rel="next" title="数据库调优">
+                <i class="fa fa-chevron-left"></i> 数据库调优
               </a>
             
           </div>
@@ -342,10 +363,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/25/数据库技术回顾与发展/" rel="prev" title="数据库技术回顾与发展">
-                数据库技术回顾与发展 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -477,7 +494,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#hello-my-name-is-linjiaqin"><span class="nav-number">1.</span> <span class="nav-text">hello, my name is linjiaqin</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#this-is-a-test-page-for-my-blog"><span class="nav-number">1.1.</span> <span class="nav-text">this is a test page for my blog</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#故障分类"><span class="nav-number">1.</span> <span class="nav-text">故障分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据访问"><span class="nav-number">1.1.</span> <span class="nav-text">数据访问</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WAL"><span class="nav-number">2.</span> <span class="nav-text">WAL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#潜入非潜入和强制非强制"><span class="nav-number">3.</span> <span class="nav-text">潜入非潜入和强制非强制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于日志的恢复"><span class="nav-number">4.</span> <span class="nav-text">基于日志的恢复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于延迟更新"><span class="nav-number">4.1.</span> <span class="nav-text">基于延迟更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于立即更新"><span class="nav-number">4.2.</span> <span class="nav-text">基于立即更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查点"><span class="nav-number">4.3.</span> <span class="nav-text">检查点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arise算法"><span class="nav-number">4.4.</span> <span class="nav-text">arise算法</span></a></li></ol></li></ol></div>
             
 
           </div>
