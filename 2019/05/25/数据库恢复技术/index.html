@@ -87,10 +87,12 @@
 <meta property="og:site_name" content="linjiaqin的博客">
 <meta property="og:description" content="故障分类事务故障系统奔溃硬盘故障 数据访问物理块： 位于磁盘上缓冲块： 临时位于主存磁盘缓冲区： 内存中用于临时存放块的区域 每个事务Ti有一个私有工作区，用于保存Ti所访问和更新的所有数据项的副本。在事务初始时创建，在事务提交或终止时删除。 WAL先写日志，这是保持原子性的关键在事务提交之前写事务相关的所有日志记录到稳定存储介质，这是保持持久性的关键，确保我们能基于日志重建提交事务 潜入非潜入和">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-25T14:56:15.306Z">
+<meta property="og:image" content="http://yoursite.com/2019/05/25/数据库恢复技术/huifu1.png">
+<meta property="og:updated_time" content="2019-05-26T13:57:18.726Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库恢复技术">
 <meta name="twitter:description" content="故障分类事务故障系统奔溃硬盘故障 数据访问物理块： 位于磁盘上缓冲块： 临时位于主存磁盘缓冲区： 内存中用于临时存放块的区域 每个事务Ti有一个私有工作区，用于保存Ti所访问和更新的所有数据项的副本。在事务初始时创建，在事务提交或终止时删除。 WAL先写日志，这是保持原子性的关键在事务提交之前写事务相关的所有日志记录到稳定存储介质，这是保持持久性的关键，确保我们能基于日志重建提交事务 潜入非潜入和">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/25/数据库恢复技术/huifu1.png">
 
 
 
@@ -340,6 +342,23 @@
 <p>分析过程<br>重做过程<br>撤销过程</p>
 <h3 id="arise算法"><a href="#arise算法" class="headerlink" title="arise算法"></a>arise算法</h3><p>steal<br>no force<br>Aries使用WAL预写日志来保证事务的Atomicity和Durability，WAL的刷新策略如下（steal/no-force）：</p>
 <p>所有的日志记录必须在它对应的行数据页被写入磁盘之前写入稳定存储（保证Atomicity）。<br>所有的日志记录必须在其所属的事务提交（commit）之前写入稳定存储（保证Durability）。</p>
+<h4 id="areis日志"><a href="#areis日志" class="headerlink" title="areis日志"></a>areis日志</h4><p>|LSN | prelsn | transID | type | pageID | legth | offset | before-image | after-image |<br>prelsn：指向属于同一事务的前一条日志记录<br>beforeimage旧值，after新值  </p>
+<p>根据日志建立事务表和脏页表<br>事务表指向的是最后修改改页最后的lsn</p>
+<h4 id="分析过程"><a href="#分析过程" class="headerlink" title="分析过程"></a>分析过程</h4><h4 id="重做过程"><a href="#重做过程" class="headerlink" title="重做过程"></a>重做过程</h4><h4 id="撤销过程"><a href="#撤销过程" class="headerlink" title="撤销过程"></a>撤销过程</h4><img src="/2019/05/25/数据库恢复技术/huifu1.png" title="恢复算法">
+<p>恢复系统<br>恢复系统是事务管理的一部份</p>
+<p>缓冲区管理<br>日志记录缓冲<br>三条规则<br>在日志记录 输出到稳定存储器后，事务Ti进入提交状态<br>在日志记录 输出到稳定存储器前，与事务Ti有关的所有日志记录必须已经输出到稳定存储器。<br>在主存中的数据块输出到数据库（非易失存储器）前，所有与该数据库中数据有关的日志记录必须已经输出到稳定存储器中。这一条规则称为先写日志规则。<br>数据库缓冲<br>强制与非强制策略（提交时是不是一定要写盘）<br>强制策略：提交时强制地将修改过的所有块都输出到磁盘中。</p>
+<p>非强制策略：即使一个事务修改了某些还没有写回到磁盘的块，也允许它提交。</p>
+<p>后者使得事务能更快地提交。大多数系统采用这种方法。</p>
+<p>窃取与非窃取策略（没提交能不能写到盘里）<br>窃取策略：允许系统将修改过的块写到磁盘中，即使做这些修改的事务还没有全部提交。</p>
+<p>非窃取策略：一个仍然活跃的事务修改过的块都不应该写出到磁盘中。</p>
+<p>大多数系统采取窃取策略。</p>
+<p>操作系统在缓冲区管理中的作用<br>两种方法管理数据库缓冲区：</p>
+<p>数据库系统保留部分memory作为缓冲区自己管理，而非交给OS管理<br>数据库系统在OS提供的虚拟内存中实现其缓冲区<br>可能会导致额外的数据到磁盘的输出。</p>
+<p>模糊检查点<br>允许checkpoint记录写入日志后，修改过的缓冲块写到磁盘前，开始做更新。</p>
+<p>锁的提前释放和逻辑undo操作<br>与B+的撤回相关。</p>
+<p>逻辑操作<br>插入和删除操作，需要逻辑undo操作，因为它们提前释放锁，称为逻辑操作。</p>
+<p>操作在执行时需要获得低级别的锁，操作完成就释放锁；相应的事务必须按两阶段方式保持一个高级别的锁，以防止并发的事务在相同的键值上执行冲突的读、插入或者删除操作。提前释放锁使得第二次插入可以在同一页面上执行。</p>
+<p>一旦释放了低级别的锁，就不能用更新的数据项的旧值来对旧值进行撤销，而必须通过执行一个补偿操作来撤销，这样的操作称为逻辑undo操作。</p>
 
       
     </div>
@@ -379,6 +398,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/26/对象关系数据库/" rel="prev" title="对象关系数据库">
+                对象关系数据库 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -462,7 +485,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -508,7 +531,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#故障分类"><span class="nav-number">1.</span> <span class="nav-text">故障分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据访问"><span class="nav-number">1.1.</span> <span class="nav-text">数据访问</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WAL"><span class="nav-number">2.</span> <span class="nav-text">WAL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#潜入非潜入和强制非强制"><span class="nav-number">3.</span> <span class="nav-text">潜入非潜入和强制非强制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于日志的恢复"><span class="nav-number">4.</span> <span class="nav-text">基于日志的恢复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于延迟更新"><span class="nav-number">4.1.</span> <span class="nav-text">基于延迟更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于立即更新"><span class="nav-number">4.2.</span> <span class="nav-text">基于立即更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查点"><span class="nav-number">4.3.</span> <span class="nav-text">检查点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arise算法"><span class="nav-number">4.4.</span> <span class="nav-text">arise算法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#故障分类"><span class="nav-number">1.</span> <span class="nav-text">故障分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据访问"><span class="nav-number">1.1.</span> <span class="nav-text">数据访问</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WAL"><span class="nav-number">2.</span> <span class="nav-text">WAL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#潜入非潜入和强制非强制"><span class="nav-number">3.</span> <span class="nav-text">潜入非潜入和强制非强制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于日志的恢复"><span class="nav-number">4.</span> <span class="nav-text">基于日志的恢复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于延迟更新"><span class="nav-number">4.1.</span> <span class="nav-text">基于延迟更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于立即更新"><span class="nav-number">4.2.</span> <span class="nav-text">基于立即更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查点"><span class="nav-number">4.3.</span> <span class="nav-text">检查点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arise算法"><span class="nav-number">4.4.</span> <span class="nav-text">arise算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#areis日志"><span class="nav-number">4.4.1.</span> <span class="nav-text">areis日志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析过程"><span class="nav-number">4.4.2.</span> <span class="nav-text">分析过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重做过程"><span class="nav-number">4.4.3.</span> <span class="nav-text">重做过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#撤销过程"><span class="nav-number">4.4.4.</span> <span class="nav-text">撤销过程</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
